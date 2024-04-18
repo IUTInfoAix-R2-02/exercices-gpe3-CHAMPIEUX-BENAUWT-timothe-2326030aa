@@ -39,23 +39,39 @@ public class Fantome extends Personnage {
 
     @Override
     public void deplacerAGauche() {
-
+        super.deplacerAGauche();
+        retineGauche.setCenterX(5);
+        retineGauche.setCenterY(6);
+        retineDroite.setCenterX(13);
+        retineDroite.setCenterY(6);
 
     }
 
     @Override
     public void deplacerADroite(double largeurJeu) {
-
+        super.deplacerADroite(largeurJeu);
+        retineGauche.setCenterX(7);
+        retineGauche.setCenterY(6);
+        retineDroite.setCenterX(15);
+        retineDroite.setCenterY(6);
     }
 
     @Override
     public void deplacerEnBas(double hauteurJeu) {
-
+        super.deplacerEnBas(hauteurJeu);
+        retineGauche.setCenterX(6);
+        retineGauche.setCenterY(7);
+        retineDroite.setCenterX(14);
+        retineDroite.setCenterY(7);
     }
 
     @Override
     public void deplacerEnHaut() {
-
+        super.deplacerEnHaut();
+        retineGauche.setCenterX(6);
+        retineGauche.setCenterY(5);
+        retineDroite.setCenterX(14);
+        retineDroite.setCenterY(5);
     }
 
 
