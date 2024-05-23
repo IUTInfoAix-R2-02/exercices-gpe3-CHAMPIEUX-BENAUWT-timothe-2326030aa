@@ -51,7 +51,7 @@ public class IHMPendu extends Application {
                     zonetext.clear();
                     lettre = lettre1;
                     System.out.println(lettre);
-                    dico.getPositions(lettre, motcacher);
+//                    dico.getPositions(lettre, motcacher);
                 }
             }
         });

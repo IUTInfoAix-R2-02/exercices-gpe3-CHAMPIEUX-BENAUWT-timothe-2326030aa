@@ -1,11 +1,15 @@
-package fr.amu.iut.exercice1;
+package fr.amu.iut.exercice11;
 
 import javafx.application.Application;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -33,10 +37,22 @@ public class Palette extends Application {
 
     private Label texteDuBas;
 
+    private SimpleIntegerProperty nbFois;
+    private SimpleStringProperty message;
+    private SimpleStringProperty couleurPanneau;
+    public Palette() {
+        nbFois = new SimpleIntegerProperty(0);
+        message = new SimpleStringProperty("");
+        couleurPanneau = new SimpleStringProperty("#000000");
+    }
 
     @Override
     public void start(Stage primaryStage) {
         root = new BorderPane();
+
+        // Initialisation de la propriété nbFois
+
+
 
         texteDuHaut = new Label();
         texteDuHaut.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -57,8 +73,37 @@ public class Palette extends Application {
         rouge = new Button("Rouge");
         bleu = new Button("Bleu");
 
-        /* VOTRE CODE ICI */
 
+//        bouton.setOnAction(event -> {
+//            nbFois.set(nbFois.get() + 1);
+//        });
+
+        /* VOTRE CODE ICI */
+        bleu.addEventHandler(MouseEvent.MOUSE_CLICKED, actionEvent -> {
+            nbBleu+=1;
+            nbFois.setValue(nbBleu);
+            message.setValue("bleu");
+            couleurPanneau.setValue("#26c4ec");
+
+        });
+        rouge.addEventHandler(MouseEvent.MOUSE_CLICKED, actionEvent -> {
+            nbRouge+=1;
+            nbFois.setValue(nbRouge);
+            message.setValue("Rouge");
+            couleurPanneau.setValue("#ed0000");
+
+        });
+
+        vert.addEventHandler(MouseEvent.MOUSE_CLICKED, actionEvent -> {
+            nbVert+=1;
+            nbFois.setValue(nbVert);
+            message.setValue("Vert");
+            couleurPanneau.setValue("#00ff00");
+
+        });
+
+        texteDuHaut.textProperty().bind(Bindings.concat(message," choisi ",nbFois," fois"));
+        panneau.styleProperty().bind(Bindings.concat( "-fx-background-color: ",couleurPanneau));
         boutons.getChildren().addAll(vert, rouge, bleu);
 
         root.setCenter(panneau);
