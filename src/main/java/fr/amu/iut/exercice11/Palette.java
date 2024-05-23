@@ -2,6 +2,8 @@ package fr.amu.iut.exercice11;
 
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
@@ -46,7 +48,18 @@ public class Palette extends Application {
         couleurPanneau = new SimpleStringProperty("#000000");
     }
 
+    private void createBindings(){
+
+        panneau.styleProperty().bind(Bindings.concat( "-fx-background-color: ",couleurPanneau));
+        BooleanProperty pasEncoreDeClic = new SimpleBooleanProperty() ;
+        pasEncoreDeClic.bind(Bindings.equal(nbFois,0));
+        texteDuHaut.textProperty().bind(Bindings.when(pasEncoreDeClic).then("cliquez !").otherwise(Bindings.concat(message," choisi ",nbFois," fois")));
+        texteDuBas.textProperty().bind(Bindings.concat("Le ",message," est une jolie couleur !"));
+        texteDuBas.styleProperty().bind(Bindings.concat("-fx-text-fill: ",couleurPanneau));
+    }
+
     @Override
+
     public void start(Stage primaryStage) {
         root = new BorderPane();
 
@@ -102,8 +115,9 @@ public class Palette extends Application {
 
         });
 
-        texteDuHaut.textProperty().bind(Bindings.concat(message," choisi ",nbFois," fois"));
-        panneau.styleProperty().bind(Bindings.concat( "-fx-background-color: ",couleurPanneau));
+
+        createBindings();
+
         boutons.getChildren().addAll(vert, rouge, bleu);
 
         root.setCenter(panneau);
